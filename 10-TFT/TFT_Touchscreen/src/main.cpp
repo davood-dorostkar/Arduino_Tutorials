@@ -78,7 +78,7 @@ void loop(void)
     if (on_btn.justPressed()) {
       do {
         on_btn.drawButton(true);
-      } while (!(on_btn.justReleased()));
+      } while ((on_btn.justPressed()));
         
         tft.fillRect(40, 80, 160, 80, GREEN);
     }
