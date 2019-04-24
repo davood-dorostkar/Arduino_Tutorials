@@ -44,12 +44,12 @@ bool Touch_getXY(void)
 
 void setup(void)
 {
-    Serial.begin(9600);
+    // Serial.begin(9600);
     uint16_t ID = tft.readID();
-    Serial.print("Resolution= ");
-    Serial.print(tft.width());
-    Serial.print(" * ");
-    Serial.println(tft.height());
+    // Serial.print("Resolution= ");
+    // Serial.print(tft.width());
+    // Serial.print(" * ");
+    // Serial.println(tft.height());
 //    Serial.print("TFT ID = 0x");
 //    Serial.println(ID, HEX);
 //    Serial.println("Calibrate for your Touch Panel");
@@ -76,9 +76,9 @@ void loop(void)
     if (off_btn.justReleased())
         off_btn.drawButton();
     if (on_btn.justPressed()) {
-      do {
+     // do {
         on_btn.drawButton(true);
-      } while ((on_btn.justPressed()));
+      //} while ((on_btn.isPressed()));
         
         tft.fillRect(40, 80, 160, 80, GREEN);
     }
