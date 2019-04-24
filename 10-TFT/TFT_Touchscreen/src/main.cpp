@@ -1,34 +1,11 @@
 #include <Arduino.h>
 
+// TFT screen definitions
 #include <Adafruit_GFX.h>
 #include <MCUFRIEND_kbv.h>
 #include <TouchScreen.h>
-
 MCUFRIEND_kbv TFT;
-
 Adafruit_GFX_Button redButton, blueButton, greenButton, yellowButton;
-
-#define minPressure 200
-#define maxPressure 1000
-const int XP = 6, XM = A2, YP = A1, YM = 7;
-const int touchLeftLimit = 107, touchhRightLimit = 910, touchUpLimit = 954, touchButtomLimit = 100;
-TouchScreen touch = TouchScreen(XP, YP, XM, YM, 300);
-int touchX, touchY;
-bool touchSense(void)
-{
-    TSPoint touchPoint = touch.getPoint();
-    pinMode(YP, OUTPUT);
-    pinMode(XM, OUTPUT);
-    digitalWrite(YP, HIGH);
-    digitalWrite(XM, HIGH);
-    bool pressed = (touchPoint.z > minPressure && touchPoint.z < maxPressure);
-    if (pressed)
-    {
-        touchX = map(touchPoint.x, touchLeftLimit, touchhRightLimit, 0, TFT.width());
-        touchY = map(touchPoint.y, touchUpLimit, touchButtomLimit, 0, TFT.height());
-    }
-    return pressed;
-}
 
 #define BLACK 0x0000
 #define BLUE 0x001F
@@ -38,6 +15,32 @@ bool touchSense(void)
 #define MAGENTA 0xF81F
 #define YELLOW 0xFFE0
 #define WHITE 0xFFFF
+
+// Touch definitions
+#define minPressure 200
+#define maxPressure 1000
+const int XP = 6, XM = A2, YP = A1, YM = 7;
+const int touchLeftLimit = 107, touchRightLimit = 910, touchUpLimit = 954, touchButtomLimit = 100;
+TouchScreen touch = TouchScreen(XP, YP, XM, YM, 300);
+int touchX, touchY;
+
+// Functions
+bool touchSense()
+{
+    TSPoint touchPoint = touch.getPoint();
+    pinMode(YP, OUTPUT);
+    pinMode(XM, OUTPUT);
+    digitalWrite(YP, HIGH);
+    digitalWrite(XM, HIGH);
+    bool pressed = (touchPoint.z > minPressure && touchPoint.z < maxPressure);
+    if (pressed)
+    {
+        touchX = map(touchPoint.x, touchLeftLimit, touchRightLimit, 0, TFT.width());
+        touchY = map(touchPoint.y, touchUpLimit, touchButtomLimit, 0, TFT.height());
+    }
+    return pressed;
+}
+
 
 void makeIcons()
 {
