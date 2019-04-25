@@ -48,10 +48,10 @@ void makeIcons()
     Button[1].initButton(&TFT, 180, 100, 100, 40, WHITE, MAGENTA, BLACK, "Blue", 2);
     Button[2].initButton(&TFT, 60, 200, 100, 40, WHITE, MAGENTA, BLACK, "Green", 2);
     Button[3].initButton(&TFT, 180, 200, 100, 40, WHITE, MAGENTA, BLACK, "Yellow", 2);
-    Button[0].drawButton(false);
-    Button[1].drawButton(false);
-    Button[2].drawButton(false);
-    Button[3].drawButton(false);
+    Button[0].drawButton();
+    Button[1].drawButton();
+    Button[2].drawButton();
+    Button[3].drawButton();
 }
 
 void initStartPage()
