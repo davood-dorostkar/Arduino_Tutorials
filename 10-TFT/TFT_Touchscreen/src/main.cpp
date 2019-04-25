@@ -4,9 +4,6 @@
 #include <Adafruit_GFX.h>
 #include <MCUFRIEND_kbv.h>
 #include <TouchScreen.h>
-MCUFRIEND_kbv TFT;
-Adafruit_GFX_Button redButton, blueButton, greenButton, yellowButton;
-
 #define BLACK 0x0000
 #define BLUE 0x001F
 #define RED 0xF800
@@ -16,6 +13,52 @@ Adafruit_GFX_Button redButton, blueButton, greenButton, yellowButton;
 #define YELLOW 0xFFE0
 #define WHITE 0xFFFF
 
+MCUFRIEND_kbv TFT;
+
+class MyButton
+{
+char Name[10];
+Adafruit_GFX_Button Button;
+public:
+void (*OnClickedEvent)();
+MyButton()
+{
+ //Button.initButton(&lcd, 60, 100, 100, 40, WHITE, MAGENTA, BLACK, "Red", 2);  
+
+}
+MyButton(MCUFRIEND_kbv lcd)
+{
+ Button.initButton(&lcd, 60, 100, 100, 40, WHITE, MAGENTA, BLACK, "Red", 2);   
+}
+void Init(MCUFRIEND_kbv *lcd)
+{
+ Button.initButton(lcd, 60, 100, 100, 40, WHITE, MAGENTA, BLACK, "Red", 2);   
+}
+
+void UpdateEvents(bool touch)
+{
+Button.press(touch);
+if (Button.justReleased())
+    {
+        Button.drawButton();
+    }
+    if (Button.justPressed())
+    {
+        Button.drawButton(true);
+        OnClickedEvent();
+    
+    }
+
+
+}
+};
+
+
+
+Adafruit_GFX_Button redButton, blueButton, greenButton, yellowButton;
+
+Adafruit_GFX_Button Buttons[4];
+
 // Touch definitions
 #define minPressure 200
 #define maxPressure 1000
@@ -23,6 +66,8 @@ const int XP = 6, XM = A2, YP = A1, YM = 7;
 const int touchLeftLimit = 107, touchRightLimit = 910, touchUpLimit = 954, touchButtomLimit = 100;
 TouchScreen touch = TouchScreen(XP, YP, XM, YM, 300);
 int touchX, touchY;
+
+MyButton TestBtn;
 
 // Functions
 bool touchSense()
@@ -41,6 +86,11 @@ bool touchSense()
     return pressed;
 }
 
+void OnRedButtonClicked()
+{
+   /// setBackColor(RED);
+}
+
 
 void makeIcons()
 {
@@ -48,6 +98,10 @@ void makeIcons()
     blueButton.initButton(&TFT, 180, 100, 100, 40, WHITE, MAGENTA, BLACK, "Blue", 2);
     greenButton.initButton(&TFT, 60, 200, 100, 40, WHITE, MAGENTA, BLACK, "Green", 2);
     yellowButton.initButton(&TFT, 180, 200, 100, 40, WHITE, MAGENTA, BLACK, "Yellow", 2);
+
+TestBtn.Init(&TFT);
+TestBtn.OnClickedEvent=OnRedButtonClicked;
+
     redButton.drawButton(false);
     blueButton.drawButton(false);
     greenButton.drawButton(false);
@@ -78,8 +132,11 @@ void setBackColor(int color)
     TFT.fillScreen(color);
     makeIcons();
 }
-void loop()
+
+void CheckButtons()
 {
+
+TestBtn.UpdateEvents(touchSense() && redButton.contains(touchX, touchY));
     redButton.press(touchSense() && redButton.contains(touchX, touchY));
     blueButton.press(touchSense() && blueButton.contains(touchX, touchY));
     greenButton.press(touchSense() && greenButton.contains(touchX, touchY));
@@ -92,7 +149,8 @@ void loop()
     if (redButton.justPressed())
     {
         redButton.drawButton(true);
-        setBackColor(RED);
+        OnRedButtonClicked();
+    
     }
 
     if (blueButton.justReleased())
@@ -124,4 +182,10 @@ void loop()
         yellowButton.drawButton(true);
         setBackColor(YELLOW);
     }
+
+}
+void loop()
+{
+CheckButtons();    
+    
 }
