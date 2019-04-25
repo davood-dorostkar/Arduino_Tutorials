@@ -5,7 +5,7 @@
 #include <MCUFRIEND_kbv.h>
 #include <TouchScreen.h>
 MCUFRIEND_kbv TFT;
-Adafruit_GFX_Button redButton, blueButton, greenButton, yellowButton;
+Adafruit_GFX_Button Button[4]; //  redButton, blueButton, greenButton, yellowButton;
 
 #define BLACK 0x0000
 #define BLUE 0x001F
@@ -15,6 +15,7 @@ Adafruit_GFX_Button redButton, blueButton, greenButton, yellowButton;
 #define MAGENTA 0xF81F
 #define YELLOW 0xFFE0
 #define WHITE 0xFFFF
+uint16_t color[4] = {RED, BLUE, GREEN, YELLOW};
 
 // Touch definitions
 #define minPressure 200
@@ -25,7 +26,7 @@ TouchScreen touch = TouchScreen(XP, YP, XM, YM, 300);
 int touchX, touchY;
 
 // Functions
-bool touchSense()
+bool touchSensed()
 {
     TSPoint touchPoint = touch.getPoint();
     pinMode(YP, OUTPUT);
@@ -41,18 +42,18 @@ bool touchSense()
     return pressed;
 }
 
-
 void makeIcons()
 {
-    redButton.initButton(&TFT, 60, 100, 100, 40, WHITE, MAGENTA, BLACK, "Red", 2);
-    blueButton.initButton(&TFT, 180, 100, 100, 40, WHITE, MAGENTA, BLACK, "Blue", 2);
-    greenButton.initButton(&TFT, 60, 200, 100, 40, WHITE, MAGENTA, BLACK, "Green", 2);
-    yellowButton.initButton(&TFT, 180, 200, 100, 40, WHITE, MAGENTA, BLACK, "Yellow", 2);
-    redButton.drawButton(false);
-    blueButton.drawButton(false);
-    greenButton.drawButton(false);
-    yellowButton.drawButton(false);
+    Button[0].initButton(&TFT, 60, 100, 100, 40, WHITE, MAGENTA, BLACK, "Red", 2);
+    Button[1].initButton(&TFT, 180, 100, 100, 40, WHITE, MAGENTA, BLACK, "Blue", 2);
+    Button[2].initButton(&TFT, 60, 200, 100, 40, WHITE, MAGENTA, BLACK, "Green", 2);
+    Button[3].initButton(&TFT, 180, 200, 100, 40, WHITE, MAGENTA, BLACK, "Yellow", 2);
+    Button[0].drawButton(false);
+    Button[1].drawButton(false);
+    Button[2].drawButton(false);
+    Button[3].drawButton(false);
 }
+
 void initStartPage()
 {
     uint16_t TFTID = TFT.readID();
@@ -65,6 +66,31 @@ void initStartPage()
     TFT.setTextWrap(false);
     TFT.print("www.sanatbazar.com");
 }
+
+void setBackColor(int color)
+{
+    TFT.fillScreen(color);
+    makeIcons();
+}
+
+void checkButtonPressed()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        Button[i].press(touchSensed() && Button[i].contains(touchX, touchY));
+        if (Button[i].justReleased())
+        {
+            Button[i].drawButton();
+        }
+        if (Button[i].justPressed())
+        {
+            Button[i].drawButton(true);
+            setBackColor(color[i]);
+        }
+    }
+}
+
+
 void setup()
 {
     initStartPage();
@@ -73,55 +99,7 @@ void setup()
     makeIcons();
 }
 
-void setBackColor(int color)
-{
-    TFT.fillScreen(color);
-    makeIcons();
-}
 void loop()
 {
-    redButton.press(touchSense() && redButton.contains(touchX, touchY));
-    blueButton.press(touchSense() && blueButton.contains(touchX, touchY));
-    greenButton.press(touchSense() && greenButton.contains(touchX, touchY));
-    yellowButton.press(touchSense() && yellowButton.contains(touchX, touchY));
-
-    if (redButton.justReleased())
-    {
-        redButton.drawButton();
-    }
-    if (redButton.justPressed())
-    {
-        redButton.drawButton(true);
-        setBackColor(RED);
-    }
-
-    if (blueButton.justReleased())
-    {
-        blueButton.drawButton();
-    }
-    if (blueButton.justPressed())
-    {
-        blueButton.drawButton(true);
-        setBackColor(BLUE);
-    }
-
-    if (greenButton.justReleased())
-    {
-        greenButton.drawButton();
-    }
-    if (greenButton.justPressed())
-    {
-        greenButton.drawButton(true);
-        setBackColor(GREEN);
-    }
-
-    if (yellowButton.justReleased())
-    {
-        yellowButton.drawButton();
-    }
-    if (yellowButton.justPressed())
-    {
-        yellowButton.drawButton(true);
-        setBackColor(YELLOW);
-    }
+checkButtonPressed();
 }
