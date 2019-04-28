@@ -44,7 +44,7 @@ void setup()
 void loop()
 {
   // uint8_t speed = analogRead(potentiometerPin);
-  int speed=100;
+  int speed=50;
   // motorDrive(speed);
   // forwardTurn(map(speed,0,1024,0,255));
 
