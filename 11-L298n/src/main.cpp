@@ -16,4 +16,10 @@ void loop()
     digitalWrite(enablePin,HIGH);
     digitalWrite(input1Pin,HIGH);
     digitalWrite(input2Pin,LOW);
+    delay(2000);
+    
+    digitalWrite(enablePin,HIGH);
+    digitalWrite(input1Pin,LOW);
+    digitalWrite(input2Pin,HIGH);
+    delay(2000);
 }
