@@ -18,7 +18,7 @@ void backwardTurn(uint8_t speed)
   analogWrite(enablePin, speed);
 }
 
-int motorDrive(uint8_t speed)
+int motorDrive(uint16_t speed)
 {
   if (speed < 550 && speed > 470)
     speed = 0;
@@ -43,6 +43,6 @@ void setup()
 
 void loop()
 {
-  uint8_t speed = analogRead(potentiometerPin);
+  uint16_t speed = analogRead(potentiometerPin);
   motorDrive(speed);
 }
