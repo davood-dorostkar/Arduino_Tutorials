@@ -9,17 +9,26 @@ void setup()
   pinMode(enablePin, OUTPUT);
   pinMode(input1Pin, OUTPUT);
   pinMode(input2Pin, OUTPUT);
+Serial.begin(9600);  
 }
 
 void loop()
 {
-    digitalWrite(enablePin,HIGH);
+  for (int i = 0; i < 255; i++)
+  {
+    analogWrite(enablePin,i);
     digitalWrite(input1Pin,HIGH);
     digitalWrite(input2Pin,LOW);
-    delay(2000);
-    
-    digitalWrite(enablePin,HIGH);
-    digitalWrite(input1Pin,LOW);
-    digitalWrite(input2Pin,HIGH);
+    Serial.println(i);
+    delay(30);
+  }
+  for (int i = 255; i > 0; i--)
+  {
+    analogWrite(enablePin,i);
+    digitalWrite(input1Pin,HIGH);
+    digitalWrite(input2Pin,LOW);
+    Serial.println(i);
+    delay(30);
+  }
     delay(2000);
 }
