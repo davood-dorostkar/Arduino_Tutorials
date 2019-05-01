@@ -29,12 +29,12 @@ void motorDrive(int speed)
     speed = 0;
   else if (speed <= 470)
   {
-    speed = map(speed, 0, 512, 50, 0);
+    speed = map(speed, 0, 512, 255, 0);
     forwardTurn(speed);
   }
   else
   {
-    speed = map((speed - 512), 0, 512, 0, 50);
+    speed = map((speed - 512), 0, 512, 0, 255);
     backwardTurn(speed);
   }
 }
@@ -92,10 +92,10 @@ void loop()
   int speed = analogRead(potentiometerPin);
   motorDrive(speed);
   // There is 4 pulses per step
-  // Encoder has 100 steps per revolution
-  // Gearbox ratio is 1:100
-  encoderAngle = (encoderPosition / 4) * (360 / 100) / 100; 
+  // Encoder has 334 steps per revolution
+  // Gearbox ratio is 1:25
+  encoderAngle = (encoderPosition / 4) * (360 / 334) / 25;
   Serial.print("Angle= ");
-  Serial.print(encoderAngle);
+  Serial.print(encoderPosition);
   Serial.println(" deg");
 }
