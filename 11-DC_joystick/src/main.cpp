@@ -45,18 +45,7 @@ void motor2BackwardDrive(int speed)
   digitalWrite(input1Motor2, LOW);
   digitalWrite(input2Motor2, HIGH);
 }
-void motor1Brake()
-{
-  digitalWrite(enableMotor1, HIGH);
-  digitalWrite(input1Motor1, HIGH);
-  digitalWrite(input2Motor1, HIGH);
-}
-void motor2Brake()
-{
-  digitalWrite(enableMotor2, HIGH);
-  digitalWrite(input1Motor2, HIGH);
-  digitalWrite(input2Motor2, HIGH);
-}
+
 void motionPlan(int speedMotor1, int speedMotor2)
 {
   if (speedMotor1 > 550)
@@ -69,8 +58,7 @@ void motionPlan(int speedMotor1, int speedMotor2)
     speedMotor1 = map(speedMotor1, 460, 0, 0, 255);
     motor1BackwardDrive(speedMotor1);
   }
-  // else
-  //   motor1Brake();
+
   if (speedMotor2 > 550)
   {
     speedMotor2 = map(speedMotor2, 550, 1024, 0, 255);
@@ -81,8 +69,7 @@ void motionPlan(int speedMotor1, int speedMotor2)
     speedMotor2 = map(speedMotor2, 460, 0, 0, 255);
     motor2BackwardDrive(speedMotor2);
   }
-  // else
-  //   motor2Brake();
+
 }
 void loop()
 {
