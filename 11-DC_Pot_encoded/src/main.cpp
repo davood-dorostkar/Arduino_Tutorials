@@ -9,32 +9,32 @@
 volatile int encoderPosition = 0;
 float encoderAngle = 0.0;
 
-void forwardTurn(uint8_t speed)
+void forwardTurn(int speed)
 {
   digitalWrite(input1Pin, HIGH);
   digitalWrite(input2Pin, LOW);
   analogWrite(enablePin, speed);
 }
 
-void backwardTurn(uint8_t speed)
+void backwardTurn(int speed)
 {
   digitalWrite(input1Pin, LOW);
   digitalWrite(input2Pin, HIGH);
   analogWrite(enablePin, speed);
 }
 
-int motorDrive(uint16_t speed)
+void motorDrive(int speed)
 {
   if (speed < 550 && speed > 470)
     speed = 0;
   else if (speed <= 470)
   {
-    speed = map(speed, 0, 512, 255, 0);
+    speed = map(speed, 0, 512, 50, 0);
     forwardTurn(speed);
   }
   else
   {
-    speed = map((speed - 512), 0, 512, 0, 255);
+    speed = map((speed - 512), 0, 512, 0, 50);
     backwardTurn(speed);
   }
 }
@@ -45,24 +45,16 @@ void doEncoderA()
   {
 
     if (digitalRead(encoderPinB) == LOW)
-    {
       encoderPosition++; // CW
-    }
     else
-    {
       encoderPosition--; // CCW
-    }
   }
   else
   {
     if (digitalRead(encoderPinB) == HIGH)
-    {
       encoderPosition++; // CW
-    }
     else
-    {
       encoderPosition--; // CCW
-    }
   }
 }
 void doEncoderB()
@@ -70,24 +62,16 @@ void doEncoderB()
   if (digitalRead(encoderPinB) == HIGH)
   {
     if (digitalRead(encoderPinA) == HIGH)
-    {
       encoderPosition++; // CW
-    }
     else
-    {
       encoderPosition--; // CCW
-    }
   }
   else
   {
     if (digitalRead(encoderPinA) == LOW)
-    {
       encoderPosition++; // CW
-    }
     else
-    {
       encoderPosition--; // CCW
-    }
   }
 }
 
@@ -105,9 +89,12 @@ void setup()
 
 void loop()
 {
-  uint16_t speed = analogRead(potentiometerPin);
+  int speed = analogRead(potentiometerPin);
   motorDrive(speed);
-  encoderAngle = (encoderPosition / 4) * (360 / 100);
+  // There is 4 pulses per step
+  // Encoder has 100 steps per revolution
+  // Gearbox ratio is 1:100
+  encoderAngle = (encoderPosition / 4) * (360 / 100) / 100; 
   Serial.print("Angle= ");
   Serial.print(encoderAngle);
   Serial.println(" deg");
