@@ -11,7 +11,7 @@ E  --> 3              VSS --> GND
 D4 --> 4              VDD --> +5V
 D5 --> 5              V0  --> Potentiometer #1
 D6 --> 6              A   --> Potentiometer #2
-D6 --> 7              K   --> GND
+D7 --> 7              K   --> GND
 
 */
 

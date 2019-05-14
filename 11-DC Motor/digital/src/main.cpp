@@ -8,8 +8,8 @@ void setup()
 
 void loop()
 {
-  digitalWrite(motorPin,HIGH);
+  digitalWrite(motorPin, HIGH);
   delay(1000);
-  digitalWrite(motorPin,LOW);
+  digitalWrite(motorPin, LOW);
   delay(1000);
 }

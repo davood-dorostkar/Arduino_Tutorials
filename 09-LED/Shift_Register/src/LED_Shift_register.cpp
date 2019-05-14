@@ -7,33 +7,38 @@ Website: www.sanatbazar.com
 
 */
 
-int dataPin = 5;
+int dataPin = 7;
 int latchPin = 6;
-int clockPin = 7;
+int clockPin = 5;
 
-void setup(){
-pinMode(dataPin,OUTPUT);
-pinMode(latchPin,OUTPUT);
-pinMode(clockPin,OUTPUT);
+void doShiftRegister(int LED)
+{
+  digitalWrite(clockPin, LOW);
+  digitalWrite(latchPin, LOW);
+  shiftOut(dataPin, clockPin, LSBFIRST, LED);
+  digitalWrite(latchPin, HIGH);
 }
 
-void loop(){
+void setup()
+{
+  pinMode(dataPin, OUTPUT);
+  pinMode(latchPin, OUTPUT);
+  pinMode(clockPin, OUTPUT);
+}
+
+void loop()
+{
   byte LED;
-  for(int i = 0; i < 8; i++){
+  for (int i = 0; i < 8; i++)
+  {
     bitSet(LED, i);
     doShiftRegister(LED);
     delay(40);
   }
-  for(int i = 0; i < 8; i++){
+  for (int i = 0; i < 8; i++)
+  {
     bitClear(LED, i);
     doShiftRegister(LED);
     delay(40);
   }
-}
-
-void doShiftRegister(int LED){
-  digitalWrite(clockPin,LOW);
-  digitalWrite(latchPin,LOW);
-  shiftOut(dataPin,clockPin,LSBFIRST,LED);
-  digitalWrite(latchPin,HIGH);
 }
