@@ -14,19 +14,17 @@ Website: www.sanatbazar.com
 #define greenWire 3
 #define yellowWire 4
 #define blueWire 5
-//Creating object for clockwise rotation
 Stepper driveCW(stepsPerRevolution, redWire, greenWire, yellowWire, blueWire);
-//Creating object for counter-clockwise rotation
-Stepper driveCCW(stepsPerRevolution, greenWire, redWire, yellowWire, blueWire);
 
 void setup()
 {
-  driveCW.setSpeed(15);
+  driveCW.setSpeed(60);
 }
+
 void loop()
 {
   driveCW.step(stepsPerRevolution);
   delay(1000);
-  driveCCW.step(stepsPerRevolution);
+  driveCW.step(-stepsPerRevolution);
   delay(1000);
 }

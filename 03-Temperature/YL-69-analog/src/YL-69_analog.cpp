@@ -28,5 +28,5 @@ void loop()
   {
     Serial.println(", Your plant needs water");
   }
-  // delay(1000);
+  delay(1000);
 }

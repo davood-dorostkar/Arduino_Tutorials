@@ -1,3 +1,4 @@
+#include <Arduino.h>
 /*
 SanatBazar
 Arduino Turorial Series
@@ -5,7 +6,6 @@ Author: Davood Dorostkar
 Website: www.sanatbazar.com
 
 */
-#include <Arduino.h>
 
 #include <dht.h>
 dht DHT;
