@@ -1,4 +1,12 @@
 #include <Arduino.h>
+/*
+SanatBazar
+Arduino Turorial Series
+Author: Davood Dorostkar
+Website: www.sanatbazar.com
+
+*/
+
 
 #define enablePin 10
 #define input1Pin 9
@@ -37,7 +45,7 @@ void loop()
     forwardTurn(i);
     delay(30);
   }
-    for (int i = 0; i < 255; i++)
+  for (int i = 0; i < 255; i++)
   {
     backwardTurn(i);
     delay(30);

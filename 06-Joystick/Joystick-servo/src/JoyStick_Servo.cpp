@@ -17,17 +17,19 @@ Servo servo2;
 #define pushJoystick 7 // Use 10K Pullup resistor
 #define LED 13
 
-void setup(){
+void setup()
+{
   servo1.attach(servo1Pin);
   servo2.attach(servo2Pin);
-  pinMode(pushJoystick,INPUT);
-  pinMode(LED,OUTPUT);
+  pinMode(pushJoystick, INPUT);
+  pinMode(LED, OUTPUT);
 }
 
-void loop(){
-  int AngleX=map(analogRead(XJoystick),0,1023,0,180);
-  int AngleY=map(analogRead(YJoystick),0,1023,0,180);
+void loop()
+{
+  int AngleX = map(analogRead(XJoystick), 0, 1023, 0, 180);
+  int AngleY = map(analogRead(YJoystick), 0, 1023, 0, 180);
   servo1.write(AngleX);
   servo2.write(AngleY);
-  digitalWrite(LED,!digitalRead(pushJoystick));
+  digitalWrite(LED, !digitalRead(pushJoystick));
 }

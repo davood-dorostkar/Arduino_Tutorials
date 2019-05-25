@@ -1,4 +1,12 @@
 #include <Arduino.h>
+/*
+SanatBazar
+Arduino Turorial Series
+Author: Davood Dorostkar
+Website: www.sanatbazar.com
+
+*/
+
 
 #define enableMotor1 5
 #define input1Motor1 6
@@ -62,14 +70,13 @@ void motionPlan(int speedMotor1, int speedMotor2)
   if (speedMotor2 > 550)
   {
     speedMotor2 = map(speedMotor2, 550, 1024, 0, 255);
-   motor2ForwardDrive(speedMotor2);
+    motor2ForwardDrive(speedMotor2);
   }
   else if (speedMotor2 < 460)
   {
     speedMotor2 = map(speedMotor2, 460, 0, 0, 255);
     motor2BackwardDrive(speedMotor2);
   }
-
 }
 void loop()
 {

@@ -1,6 +1,14 @@
 #include <Arduino.h>
-#include <Adafruit_GFX.h>    
-#include <Adafruit_TFTLCD.h> 
+/*
+SanatBazar
+Arduino Turorial Series
+Author: Davood Dorostkar
+Website: www.sanatbazar.com
+
+*/
+
+#include <Adafruit_GFX.h>
+#include <Adafruit_TFTLCD.h>
 #include <TouchScreen.h>
 
 #define LCD_CS A3
@@ -94,7 +102,6 @@ void checkButtonPressed()
     }
 }
 
-
 void setup()
 {
     initStartPage();
@@ -105,5 +112,5 @@ void setup()
 
 void loop()
 {
-checkButtonPressed();
+    checkButtonPressed();
 }

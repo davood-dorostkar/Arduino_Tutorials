@@ -1,4 +1,11 @@
 #include <Arduino.h>
+/*
+SanatBazar
+Arduino Turorial Series
+Author: Davood Dorostkar
+Website: www.sanatbazar.com
+
+*/
 
 #define motorPin 9
 

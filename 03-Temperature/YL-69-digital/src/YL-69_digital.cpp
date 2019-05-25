@@ -8,15 +8,19 @@ Website: www.sanatbazar.com
 */
 
 byte soil = 13;
-void setup() {
+void setup()
+{
   pinMode(soil, INPUT);
   Serial.begin(9600);
 }
-void loop() {
-  if (digitalRead(soil) == LOW) {
+void loop()
+{
+  if (digitalRead(soil) == LOW)
+  {
     Serial.println("Your plant is OK");
   }
-  else {
+  else
+  {
     Serial.println("Your plant needs water");
   }
   delay(1000);

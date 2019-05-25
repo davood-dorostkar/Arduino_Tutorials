@@ -1,4 +1,12 @@
 #include <Arduino.h>
+/*
+SanatBazar
+Arduino Turorial Series
+Author: Davood Dorostkar
+Website: www.sanatbazar.com
+
+*/
+
 
 #define potentiometerPin A0
 #define enablePin 10

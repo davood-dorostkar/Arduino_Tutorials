@@ -1,4 +1,11 @@
 #include <Arduino.h>
+/*
+SanatBazar
+Arduino Turorial Series
+Author: Davood Dorostkar
+Website: www.sanatbazar.com
+
+*/
 
 // TFT screen definitions
 #include <Adafruit_GFX.h>
@@ -90,7 +97,6 @@ void checkButtonPressed()
     }
 }
 
-
 void setup()
 {
     initStartPage();
@@ -101,5 +107,5 @@ void setup()
 
 void loop()
 {
-checkButtonPressed();
+    checkButtonPressed();
 }
