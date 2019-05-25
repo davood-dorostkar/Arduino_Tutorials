@@ -37,12 +37,9 @@ void setup()
 
 void loop()
 {
-  stepperRun(stepsPerRevolution,20);
-  delay(1000);
-  stepperRun(-stepsPerRevolution,20);
-  delay(1000);
-  stepperRun(stepsPerRevolution*3,60);
-  delay(1000);
-  stepperRun(-stepsPerRevolution*3,60);
-  delay(1000);
+  for (int i = 1; i < 10; i++)
+    stepperRun(stepsPerRevolution * i / 4, 15 * i);
+  for (int i = 9; i > 0; i--)
+    stepperRun(stepsPerRevolution * i / 4, 15 * i);
+  delay(3000);
 }
