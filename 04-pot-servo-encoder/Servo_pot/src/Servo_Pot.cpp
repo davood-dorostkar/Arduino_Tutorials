@@ -13,6 +13,7 @@ Servo servo;
 
 void setup()
 {
+  Serial.begin(9600);
   servo.attach(3);
 }
 
@@ -20,4 +21,5 @@ void loop()
 {
   int angle = analogRead(Pot);
   servo.write(map(angle, 0, 1023, 0, 180));
+  Serial.println(servo.read());
 }

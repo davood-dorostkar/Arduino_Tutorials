@@ -41,12 +41,12 @@ void loop()
 {
   bool isforward = digitalRead(forwardSwitch);
   bool isbackward = digitalRead(backwardSwitch);
-  if (isforward == true)
+  if (isforward)
   {
     stepperRun(stepsPerRevolution / 8, 60);
     delay(1000);
   }
-  else if (isbackward == true)
+  else if (isbackward)
   {
     stepperRun(-stepsPerRevolution / 8, 60);
     delay(1000);
