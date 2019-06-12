@@ -13,24 +13,26 @@ Website: www.sanatbazar.com
 #include <dht.h>
 dht DHT;
 #define DHT11_PIN 7
-File weatherLog;
-void timer(int seconds)
-{
-  int elapsedSeconds = 0;
-  unsigned long previousTime = 0;
-  unsigned long currentTime = millis();
-  while (elapsedSeconds < seconds)
-  {
-    // if ((unsigned long)(currentTime - previousTime) >= 1000)
-    //   elapsedSeconds++;
-    elapsedSeconds = currentTime / 1000;
-    Serial.println(elapsedSeconds);
-    Serial.println(currentTime);
-    Serial.println(previousTime);
-  }
-  Serial.println("returned");
-  return;
-}
+File weather;
+#define minute 60000UL
+
+// void timer(int seconds)
+// {
+//   int elapsedSeconds = 0;
+//   unsigned long previousTime = 0;
+//   unsigned long currentTime = millis();
+//   while (elapsedSeconds < seconds)
+//   {
+//     // if ((unsigned long)(currentTime - previousTime) >= 1000)
+//     //   elapsedSeconds++;
+//     elapsedSeconds = currentTime / 1000;
+//     Serial.println(elapsedSeconds);
+//     Serial.println(currentTime);
+//     Serial.println(previousTime);
+//   }
+//   Serial.println("returned");
+//   return;
+// }
 
 void setup()
 {
@@ -40,14 +42,14 @@ void setup()
 
 void loop()
 {
+  if (SD.exists("weather.txt"))
+  {
+    SD.remove("weather.txt");
+  }
   DHT.read11(DHT11_PIN);
-  weatherLog = SD.open("weatherLog.txt", FILE_WRITE);
-  weatherLog.println(String(DHT.temperature) + "," + String(DHT.humidity));
-  weatherLog.close();
-  Serial.println(String(DHT.temperature) + "," + String(DHT.humidity));
-  // timer(2);
-  delay(3000);
-  weatherLog = SD.open("weatherLog.txt");
-  Serial.println(weatherLog.read());
-  weatherLog.close();
+  weather = SD.open("weather.txt", FILE_WRITE);
+  weather.println(String(DHT.temperature) + ";" + String(DHT.humidity));
+  weather.close();
+  Serial.println(String(DHT.temperature) + ";" + String(DHT.humidity));
+  delay(1 * minute);
 }
