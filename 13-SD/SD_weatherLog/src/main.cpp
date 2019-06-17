@@ -1,7 +1,7 @@
 #include <Arduino.h>
 /*
 SanatBazar
-Arduino Turorial Series
+Arduino Tutorial Series
 Author: Davood Dorostkar
 Website: www.sanatbazar.com
 
@@ -15,24 +15,6 @@ dht DHT;
 #define DHT11_PIN 7
 File weather;
 #define minute 60000UL
-
-// void timer(int seconds)
-// {
-//   int elapsedSeconds = 0;
-//   unsigned long previousTime = 0;
-//   unsigned long currentTime = millis();
-//   while (elapsedSeconds < seconds)
-//   {
-//     // if ((unsigned long)(currentTime - previousTime) >= 1000)
-//     //   elapsedSeconds++;
-//     elapsedSeconds = currentTime / 1000;
-//     Serial.println(elapsedSeconds);
-//     Serial.println(currentTime);
-//     Serial.println(previousTime);
-//   }
-//   Serial.println("returned");
-//   return;
-// }
 
 void setup()
 {

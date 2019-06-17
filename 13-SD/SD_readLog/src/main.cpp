@@ -1,7 +1,7 @@
 #include <Arduino.h>
 /*
 SanatBazar
-Arduino Turorial Series
+Arduino Tutorial Series
 Author: Davood Dorostkar
 Website: www.sanatbazar.com
 

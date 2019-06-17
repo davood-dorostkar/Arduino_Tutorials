@@ -1,0 +1,44 @@
+#include <Arduino.h>
+/*
+SanatBazar
+Arduino Tutorial Series
+Author: Davood Dorostkar
+Website: www.sanatbazar.com
+
+*/
+
+#include <SoftwareSerial.h>
+#define RX 2
+#define TX 3
+SoftwareSerial esp8266(RX, TX);
+
+void setup()
+{
+  Serial.begin(9600);
+  // esp8266.begin(115200);
+  // delay(1000);
+  // esp8266.println("AT+IPR=9600");
+  esp8266.begin(9600);
+}
+
+void loop()
+{
+  Serial.println("Please enter your command: ");
+  while (!Serial.available())
+  {
+  }
+  if (Serial.available() > 0)
+  {
+    String command = Serial.readStringUntil('\n');
+    Serial.println("Entered Command: " + command);
+    esp8266.println(command);
+    while (esp8266.available() > 0)
+    {
+      String response = esp8266.readStringUntil('\n');
+      Serial.println();
+      Serial.println("Recieved Response: " + response);
+      Serial.println("===========================");
+      Serial.println();
+    }
+  }
+}

@@ -1,4 +1,12 @@
 #include <Arduino.h>
+/*
+SanatBazar
+Arduino Tutorial Series
+Author: Davood Dorostkar
+Website: www.sanatbazar.com
+
+*/
+
 #include <SD.h>
 #include <SPI.h>
 #define SS 10
