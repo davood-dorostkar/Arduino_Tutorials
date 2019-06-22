@@ -32,13 +32,23 @@ void loop()
     String command = Serial.readStringUntil('\n');
     Serial.println("Entered Command: " + command);
     esp8266.println(command);
+  }
+  int counter = 0;
+  if (esp8266.available() > 0)
+  {
     while (esp8266.available() > 0)
     {
+      if (counter == 0)
+      {
+        Serial.println("Recieved Response: ");
+      }
       String response = esp8266.readStringUntil('\n');
+      Serial.println(response);
       Serial.println();
-      Serial.println("Recieved Response: " + response);
-      Serial.println("===========================");
-      Serial.println();
+      counter++;
     }
+
+    Serial.println("===========================");
+    Serial.println();
   }
 }
