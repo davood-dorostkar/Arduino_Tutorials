@@ -7,9 +7,8 @@ Website: www.sanatbazar.com
 
 */
 
-#include <nRF24L01.h>
 #include <RF24.h>
-RF24 wifiSender(7, 8);
+RF24 wifiSender(7, 8); // (CE , CSN) pins
 const byte address[] = "00001";
 
 void setup()
