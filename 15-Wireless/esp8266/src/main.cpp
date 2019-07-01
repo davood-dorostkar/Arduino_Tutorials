@@ -14,16 +14,13 @@ SoftwareSerial esp8266(RX, TX);
 
 void setup()
 {
-  Serial.begin(9600);
-  // esp8266.begin(115200);
-  // delay(1000);
-  // esp8266.println("AT+IPR=9600");
-  esp8266.begin(9600);
+  Serial.begin(115200);
+  esp8266.begin(115200);
 }
 
 void loop()
 {
-  Serial.println("Please enter your command: ");
+  Serial.println("Please enter your AT command: ");
   while (!Serial.available())
   {
   }
