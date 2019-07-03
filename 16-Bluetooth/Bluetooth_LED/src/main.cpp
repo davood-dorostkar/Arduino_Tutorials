@@ -6,6 +6,7 @@ Author: Davood Dorostkar
 Website: www.sanatbazar.com
 
 */
+
 #include <SoftwareSerial.h>
 #define ledPin 5
 int state = 0;
@@ -28,12 +29,6 @@ void loop()
     if (message != state)
     {
       state = message;
-      Serial.print("message: ");
-      Serial.println(message);
-      Serial.print("state: ");
-      Serial.println(state);
-      Serial.println("stat != message");
-      Serial.println();
       digitalWrite(ledPin, state);
     }
   }
