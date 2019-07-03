@@ -9,15 +9,15 @@ Website: www.sanatbazar.com
 
 #include <SoftwareSerial.h>
 #define ledPin 5
-int state = 0;
+int lastState = 0;
 SoftwareSerial bluetooth(2, 3);
 
 void setup()
 {
-  Serial.begin(9600);
-  bluetooth.begin(9600);
+  Serial.begin(38400);
+  bluetooth.begin(38400);
   pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, state);
+  digitalWrite(ledPin, lastState);
 }
 
 void loop()
@@ -26,10 +26,10 @@ void loop()
   {
     int message = bluetooth.read();
     message -= 48;
-    if (message != state)
+    if (message != lastState)
     {
-      state = message;
-      digitalWrite(ledPin, state);
+      lastState = message;
+      digitalWrite(ledPin, lastState);
     }
   }
 }
