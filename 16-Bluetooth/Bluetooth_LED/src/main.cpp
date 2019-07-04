@@ -28,8 +28,8 @@ void loop()
     message -= 48;
     if (message != lastState)
     {
+      digitalWrite(ledPin, message);
       lastState = message;
-      digitalWrite(ledPin, lastState);
     }
   }
 }
