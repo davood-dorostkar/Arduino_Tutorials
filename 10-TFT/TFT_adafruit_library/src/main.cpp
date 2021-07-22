@@ -7,13 +7,18 @@ Website: www.sanatbazar.com
 
 */
 
-// TFT screen definitions
 #include <Adafruit_GFX.h>
-#include <MCUFRIEND_kbv.h>
+#include <Adafruit_TFTLCD.h>
 #include <TouchScreen.h>
-MCUFRIEND_kbv TFT;
-Adafruit_GFX_Button Button[4]; //  redButton, blueButton, greenButton, yellowButton;
 
+#define LCD_CS A3
+#define LCD_CD A2
+#define LCD_WR A1
+#define LCD_RD A0
+#define LCD_RESET A4
+Adafruit_TFTLCD TFT(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
+
+Adafruit_GFX_Button Button[4]; //  redButton, blueButton, greenButton, yellowButton;
 #define BLACK 0x0000
 #define BLUE 0x001F
 #define RED 0xF800
@@ -25,10 +30,10 @@ Adafruit_GFX_Button Button[4]; //  redButton, blueButton, greenButton, yellowBut
 uint16_t color[4] = {RED, BLUE, GREEN, YELLOW};
 
 // Touch definitions
-#define minPressure 200
+#define minPressure 10
 #define maxPressure 1000
-const int XP = 6, XM = A2, YP = A1, YM = 7;
-const int touchLeftLimit = 107, touchRightLimit = 910, touchUpLimit = 954, touchButtomLimit = 100;
+const int XP = 8, XM = A2, YP = A3, YM = 9;
+const int touchLeftLimit = 150, touchRightLimit = 920, touchUpLimit = 940, touchButtomLimit = 120;
 TouchScreen touch = TouchScreen(XP, YP, XM, YM, 300);
 int touchX, touchY;
 
@@ -43,7 +48,7 @@ bool touchSensed()
     bool pressed = (touchPoint.z > minPressure && touchPoint.z < maxPressure);
     if (pressed)
     {
-        touchX = map(touchPoint.x, touchLeftLimit, touchRightLimit, 0, TFT.width());
+        touchX = map(touchPoint.x, touchLeftLimit, touchRightLimit, TFT.width(), 0);
         touchY = map(touchPoint.y, touchUpLimit, touchButtomLimit, 0, TFT.height());
     }
     return pressed;

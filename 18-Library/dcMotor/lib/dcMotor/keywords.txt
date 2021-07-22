@@ -1,0 +1,17 @@
+
+# SanatBazar
+# Arduino Turorial Series
+# Author: Davood Dorostkar
+# Website: www.sanatbazar.com
+
+
+# Use KEYWORD1 for constructor
+
+dcMotor KEYWORD1
+
+# Use KEYWORD2 for functions
+
+forwardTurn KEYWORD2
+backwardTurn KEYWORD2
+forwardSweep KEYWORD2
+backwardSweep KEYWORD2
